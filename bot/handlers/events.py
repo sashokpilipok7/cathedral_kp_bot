@@ -35,12 +35,14 @@ async def fetch_events():
 def events(update, context):
     """
     /events:
-    fetch all events
+    Відображає події
     """
+    from .index import get_menu_markup
+
     data = asyncio.run(fetch_events())
 
     if not data:
-        update.message.reply_text('Подій не знайдено.')
+        update.message.reply_text('Подій не знайдено.', reply_markup=get_menu_markup())
         return
 
     items = []
@@ -72,4 +74,4 @@ def events(update, context):
         items.append(item)
 
     text = "\n\n".join(items)
-    update.message.reply_text(text, parse_mode='HTML')
+    update.message.reply_text(text, parse_mode='HTML', reply_markup=get_menu_markup())

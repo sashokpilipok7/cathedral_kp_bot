@@ -1,10 +1,10 @@
 def help_command(update, context):
     """
     /help:
-    return this help
+    Повертає короткий список команд з інструкціями
     """
-    from .index import index
-    text = '<b>HELP:</b>\n'
+    from .index import index, get_menu_markup
+    text = '<b>Допомога:</b>\n'
     for k, v in index().items():
         text += v.__doc__
-    update.message.reply_text(text, parse_mode='HTML')
+    update.message.reply_text(text, parse_mode='HTML', reply_markup=get_menu_markup())

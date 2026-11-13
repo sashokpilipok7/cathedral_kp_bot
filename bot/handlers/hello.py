@@ -1,7 +1,9 @@
 def hello(update, context):
     """
     /hello
-    just say hello and reply
+    Просто привітайся та отримай відповідь
     """
+    from .index import get_menu_markup
     update.message.reply_text(
-        'Hi {}, how are you?'.format(update.message.from_user.first_name))
+        'Слава Ісусу Христу! {}, Як ти?'.format(update.message.from_user.first_name),
+        reply_markup=get_menu_markup())
