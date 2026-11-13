@@ -94,6 +94,16 @@ this is a sample function file which handles the `/whoami` command
     
 ```
 
+## `events.py`
+this is a function file which handles the `/events` command
+
+`bot` &raquo; `handlers` &raquo; [`events.py`](events.py)
+```
+    /events:
+    fetch all events
+    
+```
+
 # `help.py`
 this is a sample function file which handles the `/help` command
 

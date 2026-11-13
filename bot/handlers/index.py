@@ -11,6 +11,7 @@ from .echo import echo
 from .help import help_command
 from .hello import hello
 from .whoami import whoami
+from .events import events
 
 command_map = {
     'start': start,
@@ -21,6 +22,7 @@ command_map = {
     # ....
     'whoami' : whoami,
     'hello' : hello,
+    'events' : events,
     'help' : help_command
     }
 
