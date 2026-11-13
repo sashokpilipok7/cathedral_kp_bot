@@ -55,10 +55,12 @@ def events(update, context):
 
         image_preview = acf.get("cover_image") or event.get('image')
         event_date = acf.get('event_date') or event.get('date', '')
-        category = acf.get('category', '')
 
         raw_excerpt = event.get('excerpt', {}).get('rendered', '')
-        excerpt = html.unescape(re.sub(r'<[^>]+>', '', raw_excerpt).strip())
+        raw_excerpt = html.unescape(re.sub(r'<[^>]+>', '', raw_excerpt).strip())
+        raw_excerpt = raw_excerpt.split(" ")[:23]
+        raw_excerpt.append("...")
+        excerpt = " ".join(raw_excerpt)
         link = f"{WEB_URL}events/{event.get('id')}"
 
         item = "📌 <b>" + html.escape(title) + "</b>"
@@ -66,13 +68,11 @@ def events(update, context):
             preview_added = True
             item += f'\n  <a href="{html.escape(image_preview)}">&#8205;</a>'
         if event_date:
-            item += "\n📅 " + html.escape(str(event_date))
-        if category:
-            item += "\n🏷 " + html.escape(str(category))
+            item += f"\n <b><i>{html.escape(str(event_date))} </i></b>"
         if excerpt:
             item += "\n\n" + html.escape(excerpt)
         if link:
-            item += '\n🔗 <a href="{}">Детальніше</a>'.format(html.escape(link))
+            item += '\n<a href="{}">Детальніше</a>'.format(html.escape(link))
 
         items.append(item)
 
