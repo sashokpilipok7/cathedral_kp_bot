@@ -46,11 +46,13 @@ def events(update, context):
         return
 
     items = []
+    preview_added = False
     for event in data:
         raw_title = event.get('title', {}).get('rendered', '')
         title = html.unescape(re.sub(r'<[^>]+>', '', raw_title).strip())
 
         acf = event.get('acf') or {}
+
         image_preview = acf.get("cover_image") or event.get('image')
         event_date = acf.get('event_date') or event.get('date', '')
         category = acf.get('category', '')
@@ -60,7 +62,8 @@ def events(update, context):
         link = f"{WEB_URL}events/{event.get('id')}"
 
         item = "📌 <b>" + html.escape(title) + "</b>"
-        if image_preview:
+        if image_preview and not preview_added:
+            preview_added = True
             item += f'\n  <a href="{html.escape(image_preview)}">&#8205;</a>'
         if event_date:
             item += "\n📅 " + html.escape(str(event_date))
