@@ -1,3 +1,5 @@
+import html
+
 def whoami(update, context):
     """
     /whoami: 
@@ -8,15 +10,15 @@ def whoami(update, context):
     last_name = user.last_name
     username = user.username
 
-    name = "<b>"+first_name +"</b>"
+    name = "<b>"+ html.escape(first_name) +"</b>"
     if last_name:
-        name += " <b>"+last_name + "</b>"
+        name += " <b>"+ html.escape(last_name) + "</b>"
     if username:
-        name += "\n🤗 @"+username
+        name += "\n🤗 @"+ html.escape(username)
 
     text = "You are:\n👤 {}\n🆔 {}".format(name, str(user.id))
 
     if 'group' in update.message.chat.type:
-        text += "\n👥 " +update.message.chat.title
+        text += "\n👥 " + html.escape(update.message.chat.title)
 
     update.message.reply_text(text, parse_mode='HTML')

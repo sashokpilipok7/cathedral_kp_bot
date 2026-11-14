@@ -26,7 +26,7 @@ async def fetch_events():
 
     def get_data():
         req = urllib.request.Request(EVENTS_URL, headers=HEADERS)
-        with urllib.request.urlopen(req) as response:
+        with urllib.request.urlopen(req, timeout=10) as response:
             return json.loads(response.read().decode('utf-8'))
 
     return await loop.run_in_executor(None, get_data)

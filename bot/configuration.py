@@ -16,6 +16,18 @@ class Config:
         self.token = self.config[self.mode][0]['token']
         self.botname = self.config[self.mode][0]['botname']
         self.username = self.config[self.mode][0]['username']
+        self.db = self.config.get('db', {})
+
+    def get_db_config(self):
+        return self.db
+
+    def get_db_url(self):
+        host = self.db.get('host', 'cam2021.mysql.ukraine.com.ua')
+        port = self.db.get('port', 3306)
+        database = self.db.get('database', 'cam2021_cathedralkp')
+        user = self.db.get('user', 'wp_user')
+        password = self.db.get('password', 'wp_password')
+        return f"mysql+pymysql://{user}:{password}@{host}:{port}/{database}?charset=utf8mb4"
 
     def get_mode(self):
         return self.mode
