@@ -1,5 +1,4 @@
 from db import db_manager
-from .broadcast import perform_broadcast
 
 def start(update, context):
     """
@@ -11,6 +10,3 @@ def start(update, context):
     db_manager.upsert_user(telegram_id=user.id, username=user.username, first_name=user.first_name,
                            last_name=user.last_name, language_code=user.language_code)
     update.message.reply_text('Слава Ісусу Христу! \n Тисни /events щоб побачити події', reply_markup=get_menu_markup())
-
-    # Schedule broadcast in 10 seconds
-    context.job_queue.run_once(perform_broadcast, 10, context=context.bot)
