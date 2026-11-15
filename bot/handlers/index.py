@@ -13,6 +13,7 @@ from .help import help_command
 from .hello import hello
 from .whoami import whoami
 from .events import events
+from .broadcast import broadcast_test
 
 command_map = {
     'start': start,
@@ -20,7 +21,8 @@ command_map = {
     'whoami' : whoami,
     'hello' : hello,
     'events' : events,
-    'help' : help_command
+    'help' : help_command,
+    'broadcast': broadcast_test
     }
 
 button_map = {
@@ -34,7 +36,7 @@ bot_commands = [
     BotCommand('start', '🚀 Почати'),
     BotCommand('hello', '👋 Вітання'),
     BotCommand('events', '📅 Події'),
-    BotCommand('help', '❓ Допомога')
+    BotCommand('help', '❓ Допомога'),
 ]
 
 # --------------------------------------
